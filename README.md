@@ -1,77 +1,65 @@
-# 🔄 File Forge - Conversor de Documentos em Lote
+# ⚡ File Forge - Conversor e Manipulador de Documentos
 
-Uma aplicação desktop desenvolvida em Python para facilitar a conversão de múltiplos arquivos e formatos de documentos simultaneamente. O projeto utiliza uma interface gráfica moderna, com tema escuro (Dark Mode), construída com `CustomTkinter`, permitindo que os usuários convertam arquivos entre PDF, DOCX, TXT e Markdown de forma rápida e intuitiva.
+Uma aplicação desktop moderna e de alta performance desenvolvida em Python para conversão, manipulação e gerenciamento de múltiplos documentos simultaneamente. O projeto conta com uma interface gráfica profissional inspirada em design de estúdios modernos (paleta *Nord / Deep Ocean*), suporte a *Drag & Drop* avançado, motores assíncronos e processamento 100% local.
 
-## 🚀 Funcionalidades
+## 🚀 Funcionalidades Principais
 
-- **Conversão em Lote (Batch Processing):** Selecione múltiplos arquivos de uma vez para conversão automatizada, otimizando o fluxo de trabalho.
+- **Conversão em Lote (Batch Processing):** Processe vários arquivos simultaneamente com acompanhamento de progresso individual.
 - **Suporte a Múltiplos Formatos:**
-  - PDF para DOCX (via `pdf2docx`)
-  - DOCX para PDF (via `docx2pdf`)
-  - Texto (.txt) e Markdown (.md) para PDF (via `fpdf2` e `Markdown`)
-- **Interface Gráfica Moderna:** UI desenvolvida com `CustomTkinter`, incluindo barra de progresso individual, ícones dinâmicos de formato e sistema visual de triagem (arquivos incompatíveis são automaticamente ignorados e marcados em cinza).
-- **Processamento Assíncrono:** Uso de *threading* para garantir que a interface não congele durante as conversões pesadas.
-- **Processamento Local:** Todas as conversões são feitas localmente na máquina, garantindo privacidade absoluta dos documentos.
+  - **Conversão para PDF:** De Word (`.docx`), Texto (`.txt`), Markdown (`.md`) e Imagens (`.jpg`, `.jpeg`, `.png`).
+  - **PDF para Word (`pdf2docx`):** Extração de texto e layout para documentos editáveis do Word.
+  - **Mesclagem de PDFs (`PyMuPDF`):** Agrupe múltiplos arquivos PDF em um único documento sequencial em segundos.
+  - **Divisão / Extração de Páginas:** Extraia páginas específicas ou intervalos customizados (ex: `1, 3, 5-10`) ou divida todas as páginas do PDF.
+  - **Compressão de PDF:** Reduza o tamanho de PDFs pesados de forma inteligente.
+- **Interface Studio (Nord / Deep Ocean):** Layout dividido em duas colunas com cards de ferramentas interativos, fila em tempo real com indicador de quantidade, botão de remoção individual e zona de arraste (*Drop Zone*) dinâmica na base.
+- **Execução Silenciosa (`iniciar.bat`):** Inicialização otimizada para Windows sem janelas de terminal abertas.
 
 ## 🏗️ Arquitetura do Projeto
 
-O código foi construído de forma modular para facilitar a manutenção e escalabilidade. A estrutura de pastas está dividida da seguinte forma:
-
-    📦 conversor_arquivos
-    ┣ 📂 assets/              # Ícones dinâmicos e imagens da interface (ex: pasta.png, md.png)
-    ┣ 📂 conversores/         # Motor lógico central (Core)
-    ┃ ┣ 📜 docx_pdf.py        # Módulo de conversão Word > PDF
-    ┃ ┣ 📜 pdf_docx.py        # Módulo de conversão PDF > Word
-    ┃ ┗ 📜 texto_pdf.py       # Módulo de conversão TXT/MD > PDF
-    ┣ 📂 interface/           # Componentes visuais e GUI
-    ┃ ┗ 📜 app_gui.py         # Janela principal, botões e roteamento
-    ┣ 📜 main.py              # Arquivo principal de execução
-    ┗ 📜 requirements.txt     # Dependências do projeto
+```text
+📁 conversor_arquivos
+┣ 📂 assets/              # Ícones dinâmicos da interface (pdf.png, docx.png, etc.)
+┣ 📂 conversores/         # Motores lógicos isolados (Core)
+┃ ┣ 📜 docx_pdf.py        # Conversão Word > PDF
+┃ ┣ 📜 pdf_docx.py        # Conversão PDF > Word
+┃ ┣ 📜 texto_pdf.py       # Conversão TXT/MD > PDF
+┃ ┣ 📜 mesclar_pdf.py     # Junção de múltiplos PDFs
+┃ ┣ 📜 img_pdf.py         # Conversão de Imagens > PDF
+┃ ┣ 📜 dividir_pdf.py     # Divisão e extração de páginas em PDFs
+┃ ┗ 📜 comprimir_pdf.py   # Compressão e otimização de PDFs
+┣ 📂 interface/           # Componentes visuais e layouts
+┃ ┣ 📜 app_gui.py         # Layout clássico original
+┃ ┗ 📜 app_gui_novo.py    # Novo layout Studio (Nord / Deep Ocean)
+┣ 📜 iniciar.bat          # Script de inicialização automática e silenciosa (Pythonw)
+┣ 📜 main.py              # Ponto de entrada principal da aplicação
+┗ 📜 requirements.txt     # Dependências e bibliotecas do projeto
+```
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **[Python 3.x](https://www.python.org/):** Linguagem principal do projeto.
-- **[CustomTkinter](https://github.com/TomSchimansky/CustomTkinter):** Biblioteca para a interface gráfica moderna.
-- **[pdf2docx](https://pypi.org/project/pdf2docx/):** Motor de conversão de PDF para Word.
-- **[docx2pdf](https://pypi.org/project/docx2pdf/):** Motor de conversão de Word para PDF.
-- **[fpdf2](https://pypi.org/project/fpdf2/) e [Markdown](https://pypi.org/project/Markdown/):** Renderização e conversão de textos e arquivos MD para PDF.
-- **[Pillow](https://pypi.org/project/Pillow/):** Manipulação de imagens e renderização dos ícones na interface.
-- **[pywin32](https://pypi.org/project/pywin32/):** Integração com o sistema COM do Windows (essencial para *threading* do docx2pdf).
-
-## ⚙️ Pré-requisitos
-
-Certifique-se de ter o Python 3 instalado no seu sistema. O aplicativo foi construído e otimizado para o ambiente **Windows 11**, onde as bibliotecas que dependem do Office (como a `docx2pdf`) funcionam nativamente.
+- **[Python 3.x](https://www.python.org/):** Linguagem base.
+- **[CustomTkinter](https://github.com/TomSchimansky/CustomTkinter):** Framework moderno para interface gráfica.
+- **[tkinterdnd2](https://github.com/pminkov/tkinterdnd2):** Suporte nativo a *Drag & Drop* no Windows.
+- **[PyMuPDF (fitz)](https://pypi.org/project/PyMuPDF/):** Motor de altíssima performance para manipulação, mesclagem, divisão e compressão de PDFs.
+- **[pdf2docx](https://pypi.org/project/pdf2docx/) & [docx2pdf](https://pypi.org/project/docx2pdf/):** Conversão bidirecional de documentos Word e PDF.
+- **[fpdf2](https://pypi.org/project/fpdf2/) & [Markdown](https://pypi.org/project/Markdown/):** Renderização de textos e arquivos `.md` em PDF formatado.
+- **[Pillow (PIL)](https://pypi.org/project/Pillow/):** Manipulação e conversão de imagens.
+- **[pywin32](https://pypi.org/project/pywin32/):** Integração com o sistema COM do Windows.
 
 ## 📥 Instalação e Execução
 
-1. Clone o repositório para a sua máquina local:
-   ```bash
-   git clone https://github.com/ViniBulhoes/nome-do-repositorio.git
-   cd nome-do-repositorio
-   ```
+1. Clone ou baixe o repositório para sua máquina local.
+2. **Modo Automático (Recomendado para Windows):**
+   Dê um duplo clique no arquivo **`iniciar.bat`**. Ele verificará ou criará o ambiente virtual (`.venv`), instalará as dependências automaticamente e abrirá o aplicativo de forma limpa e silenciosa.
 
-2. Crie e ative um ambiente virtual (recomendado):
+3. **Modo Manual via Terminal:**
    ```bash
    python -m venv .venv
    .venv\Scripts\activate
-   ```
-
-3. Instale todas as dependências necessárias de uma só vez:
-   ```bash
    pip install -r requirements.txt
-   ```
-
-4. Execute a aplicação:
-   ```bash
    python main.py
    ```
 
-*(Nota: Certifique-se de que o Microsoft Word está instalado na máquina caso utilize a conversão de DOCX para PDF, pois a biblioteca requer comunicação com os componentes COM do Office).*
-
-## 📦 Deploy e Distribuição
-
-A arquitetura modular (`main.py` separado da lógica) foi desenhada para ser totalmente compatível com o **PyInstaller**. Futuramente, o projeto pode ser compilado num único arquivo executável `.exe` para distribuição sem necessidade de instalação do Python na máquina de destino.
-
 ## 👨‍💻 Desenvolvedor
 
-- **Vinicius Porto (Bulhões)** - [ViniBulhoes](https://github.com/ViniBulhoes)
+Desenvolvido por **Vinicius Porto (Bulhões)** - [ViniBulhoes](https://github.com/ViniBulhoes)
