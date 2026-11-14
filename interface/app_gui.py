@@ -87,11 +87,11 @@ class ConversorApp(TkinterDnD_CTk):
         
         # Lista de Ferramentas (Cards Clicáveis em vez de RadioButtons)
         ferramentas = [
-            ("to_pdf", "📄  Converter para PDF", "Word, Imagens, TXT e MD"),
-            ("pdf2docx", "📝  PDF para Word", "Extrai texto editável (.docx)"),
-            ("merge_pdf", "🔗  Mesclar PDFs", "Une vários PDFs em um só"),
-            ("split_pdf", "✂️  Dividir / Extrair PDF", "Separa páginas ou intervalos"),
-            ("compress_pdf", "🗜️  Comprimir PDF", "Reduz o tamanho do arquivo")
+            ("to_pdf", "Converter para PDF", "Word, Imagens, TXT e MD"),
+            ("pdf2docx", "PDF para Word", "Extrai texto editável (.docx)"),
+            ("merge_pdf", "Mesclar PDFs", "Une vários PDFs em um só"),
+            ("split_pdf", "Dividir / Extrair PDF", "Separa páginas ou intervalos"),
+            ("compress_pdf", "Comprimir PDF", "Reduz o tamanho do arquivo")
         ]
         
         for idx, (chave, titulo, desc) in enumerate(ferramentas, start=1):
@@ -109,6 +109,8 @@ class ConversorApp(TkinterDnD_CTk):
                 border_color=self.bg_card,
                 command=lambda k=chave: self.selecionar_ferramenta(k)
             )
+            btn_card._text_label.configure(justify="left")
+
             btn_card.grid(row=idx, column=0, sticky="ew", padx=16, pady=4)
             self.botoes_ferramentas[chave] = btn_card
             
